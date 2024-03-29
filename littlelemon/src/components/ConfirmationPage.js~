@@ -1,0 +1,25 @@
+import {useLocation} from 'react-router-dom';
+import ConfirmationTable from "./ConfirmationTable";
+
+const ConfirmationPage = () => {
+	const location = useLocation();
+	const data = location.state;
+	console.log(data);
+  return (
+  <section className = "container">
+		  	<h2 style={{textAlign: "center"}}>Reservation Confirmation</h2> 
+		  					<p>
+					Your Reservation has been confirmed
+				
+				</p>
+			<div className="confirmation">
+				<ConfirmationTable table = {data} />
+			</div>
+			<p>
+					For any changes or cancellations please call 752-338-9174 or email littlelemon@restaurant.com
+				
+				</p>
+  </section>
+  );
+};
+export default ConfirmationPage;

@@ -1,0 +1,13 @@
+
+th {
+	text-align: center;
+}
+
+#table-data{
+	padding-left: 10px;
+}
+
+p{
+  margin-top: 1em;
+  margin-bottom: rem;
+}
