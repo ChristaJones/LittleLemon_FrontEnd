@@ -1,4 +1,3 @@
-
 import { Formik, Field, Form, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 
@@ -6,9 +5,6 @@ import './BookingForm.css';
 
 const BookingForm = (props) => {
 
-
-  
- 
   return (
   <Formik className="container"
 	initialValues={{ firstName: '', lastName: '',email: '', date:'', time:'',guests:'', role:''}}
