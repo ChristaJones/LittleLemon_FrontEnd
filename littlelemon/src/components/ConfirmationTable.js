@@ -21,7 +21,7 @@ const ConfirmationTable = (props) => {
 				  </tr>
 				  <tr>
 				    <td>Date:</td>
-				    <td id="table-data">{format(props.table.date, 'MM/dd/yyyy')}</td>
+				    <td id="table-data">{props.table.date}</td>
 				  </tr>
 				  <tr>
 				    <td>Time:</td>

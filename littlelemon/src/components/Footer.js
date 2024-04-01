@@ -8,30 +8,26 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import Chefs from "../images/Mario and Adrian A.jpg"
+import { Link } from 'react-router-dom';
 
 const socials = [
-  {
-    id:0,    
+  {   
     icon: faEnvelope,
     url: "mailto: hello@example.com",
   },
-  {
-    id:1, 
+  { 
     icon: faGithub,
     url: "https://github.com",
   },
   {
-    id:2, 
     icon: faLinkedin,
     url: "https://www.linkedin.com",
   },
-  {
-    id:3,    
+  {    
     icon: faMedium,
     url: "https://medium.com",
   },
-  {
-    id:4,	
+  {	
     icon: faStackOverflow,
     url: "https://stackoverflow.com",
   },
@@ -47,14 +43,16 @@ const Footer = () => {
   			<img src={Chefs} alt="chefs" />
   		</article>
 		<article>
-		      <ul>
-			      <li><a href="/home">Home</a></li>
-			      <li><a href="#about">About</a></li>
-		              <li><a href="#menu">Menu</a></li>
-		              <li><a href="/reservations">Reservations</a></li>
-		              <li><a href="#order">Order Online</a></li>
-		              <li><a href="#login">Login</a></li>
-		      </ul>
+			<nav aria-label="footer-navigation">
+			      <ul>
+				      <li><Link to="/home">Home</Link></li>
+				      <li><Link to="#about">About</Link></li>
+			              <li><Link to="#menu">Menu</Link></li>
+			              <li><Link to="/reservations">Reservations</Link></li>
+			              <li><Link to="#order">Order Online</Link></li>
+			              <li><Link to="#login">Login</Link></li>
+			      </ul>
+			</nav>
 		</article>
 		<article>
 			<h4>Contact</h4>
@@ -69,7 +67,7 @@ const Footer = () => {
 		<article>
 			<ul>
 			{socials.map(social => (
-	              <li key = {social.url}><a  href= {social.url}><FontAwesomeIcon icon={social.icon} size="2x" /></a></li>
+	              <li key = {social.url}><Link to= {social.url}><FontAwesomeIcon icon={social.icon} size="2x" /></Link></li>
 	            ))}
 	            </ul>
 		</article>

@@ -1,5 +1,6 @@
 
 import NavSection from "./Nav";
+
 const Header = () => {
   return (
   <header>

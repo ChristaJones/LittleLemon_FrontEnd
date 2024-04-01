@@ -6,9 +6,6 @@ import './BookingForm.css';
 
 const BookingForm = (props) => {
 
-
-  
- 
   return (
   <Formik className="container"
 	initialValues={{ firstName: '', lastName: '',email: '', date:'', time:'',guests:'', role:''}}

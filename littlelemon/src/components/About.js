@@ -3,7 +3,7 @@ import Chefs from "../images/Mario and Adrian b.jpg"
 import Chef from "../images/restaurant chef B.jpg"
 const About = () => {
   return (
-  <section className = "container">
+  <section className = "container" aria-label="about">
 	<div id = "body">
 	  	<article>
 		  	<h1>Little Lemon</h1>

@@ -1,6 +1,8 @@
+import { createContext, useContext, useMemo, useState} from 'react'
 
 
-export let initialTimesByDate = [
+
+const initialTimesByDate = [
 	
     { date: '2024-03-27', timeavail: ['10:00', '11:00', '12:00']},
     { date: '2024-03-28', timeavail: ["17:00", "18:00","19:00","20:00","21:00","22:00"]},
@@ -28,5 +30,21 @@ export let initialTimesByDate = [
     { date: '2024-04-19', timeavail: ["17:00", "18:00","19:00","20:00","21:00","22:00"]},
     { date: '2024-04-20', timeavail: ["17:00", "18:00","19:00","20:00","21:00","22:00"]},
   ];
+
+
+const DateContext = createContext(undefined);
+
+
+export const DateProvider = ({children}) =>{
+	
+	const [availableTimesByDate, setAvailableTimesByDate] = useState(initialTimesByDate)
+	const value = useMemo(() => ({
+	    availableTimesByDate, setAvailableTimesByDate
+	  }), [availableTimesByDate]);
+	return <DateContext.Provider value = {value}>{children}</DateContext.Provider>
+}
+
+
+export const useDate = () => useContext(DateContext)
 
 

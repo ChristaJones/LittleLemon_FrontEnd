@@ -25,7 +25,7 @@ const testimonialsf = [
 
 const Testimonials = () => {
   return (
-  <section className = "container">
+  <section className = "container" aria-label="testimonials">
 	
   	<h1 id="test" className="odd">Testimonials</h1>
   	<div id="body">		

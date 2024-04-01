@@ -1,10 +1,16 @@
-import {useLocation} from 'react-router-dom';
+import {useLocation,  useNavigate} from 'react-router-dom';
 import ConfirmationTable from "./ConfirmationTable";
 
 const ConfirmationPage = () => {
 	const location = useLocation();
 	const data = location.state;
 	console.log(data);
+	const navigate=useNavigate();
+	const handleClick = () =>{
+		navigate("/reservations")
+	}
+	
+	
   return (
   <section className = "container">
 		  	<h2 style={{textAlign: "center"}}>Reservation Confirmation</h2> 
@@ -13,7 +19,7 @@ const ConfirmationPage = () => {
 			<div className="confirmation">
 				<ConfirmationTable table = {data} />
 			</div>
-			
+			<button onClick={handleClick}>Return to Reservations</button>
   </section>
   );
 };

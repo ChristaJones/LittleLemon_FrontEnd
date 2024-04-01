@@ -6,7 +6,7 @@ const Hero = () => {
     const navigate = useNavigate(); 
     const handleClick = () => navigate('/reservations'); 
   return (
-  <section className = "container">
+  <section className = "container" aria-label="hero">
       <div id="body">
 	      <article >
 	      	<h1 className="odd">Little Lemon</h1>
@@ -17,7 +17,7 @@ const Hero = () => {
 		<button onClick={handleClick}>Reserve Table</button>
 	      </article>
 	      <article>
-	      <img src={Restaurant} alt="restaurant" />
+	      	<img src={Restaurant} alt="restaurant" />
 	      </article>
       </div>
   </section>
