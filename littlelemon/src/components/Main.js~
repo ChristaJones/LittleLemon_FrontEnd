@@ -2,7 +2,7 @@ import Hero from "./Hero";
 import Specials from "./Specials";
 import Testimonials from "./Testimonials";
 import About from "./About";
-import '../assets/styles/Main.css';
+import './Main.css';
 const Main = () => {
   return (
   <main>

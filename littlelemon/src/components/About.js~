@@ -1,6 +1,6 @@
 
-import Chefs from "../assets/images/Mario and Adrian b.jpg"
-import Chef from "../assets/images/restaurant chef B.jpg"
+import Chefs from "../images/Mario and Adrian b.jpg"
+import Chef from "../images/restaurant chef B.jpg"
 const About = () => {
   return (
   <section className = "container" aria-label="about">

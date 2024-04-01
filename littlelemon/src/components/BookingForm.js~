@@ -76,7 +76,8 @@ const BookingForm = (props) => {
 	            			<label htmlFor="time">Time <sup>*</sup></label>
 				</div>	    
 				<div className="col-75">        
-	            			<Field className="field" as = "select" id="time" name="time">	            					         
+	            			<Field className="field" as = "select" id="time" name="time">
+	            				<option></option>		         
             		  			{props.times.map(available => (   
 						<option key={available}>{available}</option>
             					))} 
