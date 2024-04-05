@@ -18,8 +18,9 @@ const ConfirmationPage = () => {
 					
 			<div className="confirmation">
 				<ConfirmationTable table = {data} />
+				<button onClick={handleClick}>Return to Reservations</button>
 			</div>
-			<button onClick={handleClick}>Return to Reservations</button>
+			
   </section>
   );
 };

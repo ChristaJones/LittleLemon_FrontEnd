@@ -1,39 +1,11 @@
 import { useEffect, useReducer} from "react";
 import BookingForm from "./BookingForm";
+import { updateTimes} from "../reducers/UpdateTimes";
 import { useDate} from "../context/DateContext";
 import { format } from 'date-fns';
 import { useNavigate} from "react-router-dom";
  
 const today = format(new Date(), 'yyyy-MM-dd')
-
-
-	 
-  const updateTimes = (state, action) =>{
-  	switch(action.type){
-  		case "SET_TIME":
-  		{
-  			
-  			return {
-  				...state,
-  				times: action.payload
-  			}
-  		}
-  		case "SET_DATE":
-  		{
-  			return {
-  				...state,
-  				date: action.date
-  			}
-  		}
-  		default:
-  		{
-			return state;  		
-  		}	
-  	}
-  	
-  } 
-
-
 
 const BookingPage = () => {
 	const {availableTimesByDate, setAvailableTimesByDate} = useDate()
@@ -60,10 +32,9 @@ const BookingPage = () => {
 		  const fetchAPI = (date) => {
 		    	return new Promise((resolve, reject) => {
 			        setTimeout(() =>{
-			        	const check = availableTimesByDate.find(available => available.date === date).timeavail 
-			            if(check){
-			            	console.log("check works")
-			                resolve(check)
+			        	//const check = availableTimesByDate.find(available => available.date === date).timeavail 
+			            if(availableTimesByDate.find(available => available.date === date)){			            	
+			                resolve(availableTimesByDate.find(available => available.date === date).timeavail)
 			            }
 			            else{
 			                reject(new Error('No available times for the selected date.'));
@@ -71,43 +42,49 @@ const BookingPage = () => {
 			        } , 1000)
 		    	})
 		  }
+		  
 		fetchAPI(availableTimes.date)
 		.then(response=>
 		{
-			dispatch({ type: "SET_TIME", payload:response})		
+			
+			dispatch({ type: "SET_TIME", times:response})	
+				
 		})
 		.catch(error =>
-		{})
-	});
+		{
+			console.log("No Dates")	
+			dispatch({ type: "SET_DATE", date: today})	
+		})
+	}, [availableTimes.date, availableTimesByDate]);
 		
      	const submitForm  = (formData) => {
   		
   		submitAPI(formData)
   		.then(response=>
-  		{  	
-  			console.log("response:",response)	
+  		{  		
   			if(response){
-  				console.log("in response:",response)
   				
   				const nextAvailableTimesByDate = availableTimesByDate.map((available) => { 
 									      	
 				      	if (available.date === formData.date) {
 				        // Increment the clicked counte
 				          const newTime=available.timeavail.filter(time => time !== formData.time);				       				   
-				          console.log("in if:", available.timeavail)
+				          
 				       		return {...available,
 				       		timeavail:newTime}	  
 				      } 
-				      console.log("in next:", available)
+				      
 				     return available
 				});
-				console.log("next:",nextAvailableTimesByDate)
+				
   				setAvailableTimesByDate(nextAvailableTimesByDate)	
 	  			navigate("/confirmation", {state: formData})
-	  			console.log(availableTimesByDate)
+	  			
   			}
   		})
-  		.catch(error =>{})
+  		.catch(error =>{
+			  		
+  		})
   	}
   			
   return (

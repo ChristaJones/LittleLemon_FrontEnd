@@ -1,13 +1,15 @@
 import { Formik, Field, Form, ErrorMessage} from "formik";
 import * as Yup from 'yup';
-
+import { format } from 'date-fns';
 import '../assets/styles/BookingForm.css';
 
 const BookingForm = (props) => {
-
+ const minDate = new Date(2024,2,27);
+ const maxDate = new Date(2024,3,20);
+ const today = format(new Date(), 'yyyy-MM-dd')
   return (
   <Formik className="container"
-	initialValues={{ firstName: '', lastName: '',email: '', date:'', time:'--:--',guests:'', role:'Other'}}
+	initialValues={{ firstName: '', lastName: '',email: '', date:today, time:'--:--',guests:'', role:'Other'}}
         onSubmit={(values, onSubmitProps) => {
                 console.log("submit")
                 props.handleSubmit(values)
@@ -18,14 +20,14 @@ const BookingForm = (props) => {
        validationSchema={Yup.object({
 	      firstName: Yup.string().min(3, "First Name needs to be longer").required('Required'),      
 	      email:Yup.string().email("Invalid email address").required("Required"),
-	      date:Yup.date().required("Required"),
+	      date:Yup.date().min(minDate,"Date must be later than 2024-03-27").max(maxDate,"Date must be at earlier than 2024-04-20").required("Required"),
 	      time:Yup.string().required("Required"),
-	      guests: Yup.number().min(2, "Parties must be larger than 1").max(10, "Parties cannot exceed 10" ).required("Required"),
+	      guests: Yup.number().integer("Number of guests must be a whole number").min(2, "Parties must be larger than 1").max(10, "Parties cannot exceed 10" ).required("Required"),
 	    })}
   >
   
 	 { values =>(
-	 	 <Form >	       
+	 	 <Form name="form" aria-label = "form">	       
 	          	<div className="form-group">
 	          		<div className="col-25">
 	            			<label htmlFor="firstName"> First Name <sup>*</sup></label>
@@ -51,7 +53,7 @@ const BookingForm = (props) => {
 	            			<label htmlFor="email"> Email Address <sup>*</sup> </label>
 				</div>
 				<div className="col-75">	            
-	            			<Field className="field" type="email" name="email"/>
+	            			<Field className="field" id="email" type="email" name="email"/>
 	            			<ErrorMessage className="error" name="email">
 		            			{ msg => <div style={{ color: 'red' }}>{msg}</div> }
 		            		 </ErrorMessage>
@@ -62,7 +64,7 @@ const BookingForm = (props) => {
 	            			<label htmlFor="date">Date <sup>*</sup></label>
 				</div>	 
 				<div className="col-75">           
-	            			<Field className="field" type="date" name="date" onChange={(e)=>{
+	            			<Field className="field" id = "date" role='date' type="date" name="date" onChange={(e)=>{
 	            				props.dispatch({ type: "SET_DATE", date: e.target.value})
 	            				values.setFieldValue("date", e.target.value)
 	            			}}  />
@@ -76,9 +78,9 @@ const BookingForm = (props) => {
 	            			<label htmlFor="time">Time <sup>*</sup></label>
 				</div>	    
 				<div className="col-75">        
-	            			<Field className="field" as = "select" id="time" name="time">	            					         
+	            			<Field className="field" as = "select" id="time" name="time" disabled={values.errors.date}>	            					         
             		  			{props.times.map(available => (   
-						<option key={available}>{available}</option>
+						<option data-testid="select-time" key={available}>{available}</option>
             					))} 
 		   			</Field>
 		   			<ErrorMessage className="error" name="time">
@@ -91,7 +93,7 @@ const BookingForm = (props) => {
 	            			<label htmlFor="guests"> Number of Guests <sup>*</sup></label>
 	            		</div>
 	            		<div className="col-75">
-	            			<Field className="field" min="0" name="guests" type="number"/>
+	            			<Field className="field" id ="guests" min="0" name="guests" type="number"/>
 	            			<ErrorMessage className="error" name="guests">
 		            			{ msg => <div style={{ color: 'red' }}>{msg}</div> }
 		            		 </ErrorMessage>
@@ -102,7 +104,7 @@ const BookingForm = (props) => {
 	            			<label htmlFor="role">Occasion <sup>*</sup></label>
 				</div>	
 				<div className="col-75">            
-	            			<Field className="field" as = "select" name="role">				              
+	            			<Field className="field" id = "role" as = "select" name="role">				              
 				              <option  value="Birthday">Birthday</option>
 				              <option value="Anniversary">Anniversary</option>
 				              <option value="Other">Other</option>
